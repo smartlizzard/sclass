@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/deepaks374/app-of-apps-repo  # Replace with your actual GitHub account/repo URL
+    repoURL: https://github.com/smartlizzard/sclass  # Replace with your actual GitHub account/repo URL
     path: .                                                  # Ensure this is the correct path to the directory with your apps
-    targetRevision: main                                     # Replace "main" with the correct branch or tag instead of "HEAD"
+    targetRevision: day-137-q13                                    # Replace "main" with the correct branch or tag instead of "HEAD"
     directory:
       recurse: true                                          # Recurse through the repository for subdirectories
   destination:
