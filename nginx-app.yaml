@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-app
+  namespace: argocd
+spec:
+  destination:
+    namespace: nginx-app
+    server: https://kubernetes.default.svc
+  project: sample-project
+  source:
+    path: app/
+    repoURL: https://github.com/smartlizzard/sclass.git
+    targetRevision: day-137-q11
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
