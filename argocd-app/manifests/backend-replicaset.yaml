@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: backend-replicaset
+  namespace: argocd
+  labels:
+    app: backend
+    tier: backend
+spec:
+  replicas: 2  # Set the desired number of backend pods
+  selector:
+    matchLabels:
+      app: backend
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+        tier: backend
+    spec:
+      containers:
+        - name: backend
+          image: nginx:latest  # Replace with your backend API image
+          ports:
+            - containerPort: 80
+      initContainers:  # Ensures backend waits for the PreSync job
+        - name: wait-for-db-migration
+          image: busybox:latest
+          command:
+            - "sh"
+            - "-c"
+            - |
+              echo "Waiting for db-migration-job to complete...";
+              while [[ $(kubectl get job db-migration-job -n argocd -o jsonpath='{.status.succeeded}') != "1" ]]; do
+                sleep 2;
+              done;
+              echo "DB Migration completed. Starting backend..."
