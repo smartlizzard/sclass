@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration-job
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/hook: PreSync  # Ensures the job runs before backend deployment
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded  # Deletes previous job runs before creating a new one
+spec:
+  template:
+    metadata:
+      labels:
+        app: db-migration
+    spec:
+      restartPolicy: Never  # Ensures the job runs once and doesn't restart
+      containers:
+        - name: migration
+          image: alpine:latest  # Lightweight image
+          command: ["sh", "-c", "echo 'Running DB Migration...'; sleep 5; echo 'Migration Complete.'"]
