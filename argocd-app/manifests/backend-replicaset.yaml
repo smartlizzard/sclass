@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: backend-replicaset
-  namespace: argocd
   labels:
     app: backend
     tier: backend
