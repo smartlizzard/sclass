@@ -21,7 +21,7 @@ spec:
         - name: backend
           image: nginx:latest  # Replace with your backend API image
           ports:
-            - containerPort: 80
+            - containerPort: 8080
       initContainers:  # Ensures backend waits for the PreSync job
         - name: wait-for-db-migration
           image: busybox:latest
