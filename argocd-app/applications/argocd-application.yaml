@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-app
+  name: backend-app
   namespace: argocd
   labels:
     app: backend-app
 spec:
   destination:
-    namespace: nginx-app
+    namespace: backend-app
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: manifests
+    path: argocd-app/manifests
     repoURL: https://github.com/smartlizzard/sclass.git
     targetRevision: day-137-q13-2
   syncPolicy:
