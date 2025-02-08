@@ -3,7 +3,7 @@ name: Python Setup Example
 on:
   push:
     branches:
-      - 'day-142-q16'
+      - 'main'
 
 jobs:
   setup-python:
@@ -24,10 +24,8 @@ jobs:
       run: |
         python --version
 
-    - name: Run Flake8 Linting
-      run: |
-        flake8 --version
+    - name: Install Ruff
+      run: pip install ruff
 
-    - name: Run Pytest
-      run: |
-        pytest --version
+    - name: Run Ruff Lint
+      run: ruff check .
