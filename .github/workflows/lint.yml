@@ -1,0 +1,33 @@
+name: Python Setup Example
+
+on:
+  push:
+    branches:
+      - 'day-142-q16'
+
+jobs:
+  setup-python:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest flake8
+
+    - name: Check Python Version
+      run: |
+        python --version
+
+    - name: Run Flake8 Linting
+      run: |
+        flake8 --version
+
+    - name: Run Pytest
+      run: |
+        pytest --version
