@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      # Step 3: Run the Python script with GitHub username
+      # Step 3: Run the Python script with GitHub username #"${{ github.actor }}"
       - name: Run Greeting Script
         run: |
-          python script.py "${{ github.actor }}"
+          python script.py "John Doe" 
