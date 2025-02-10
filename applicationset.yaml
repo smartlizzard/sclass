@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: jenkins-appset
+spec:
+  generators:
+    - list:
+        elements:
+          - env: dev
+            namespace: jenkins-dev
+            valuesFile: overrides/dev.yaml
+          - env: prod
+            namespace: jenkins
+            valuesFile: overrides/prod.yaml
+  template:
+    metadata:
+      name: jenkins-{{env}}
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/smartlizzard/sclass
+        targetRevision: day-137-q14
+        path: jenkins
+        helm:
+          valueFiles:
+            - "{{valuesFile}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
