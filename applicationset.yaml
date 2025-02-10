@@ -18,7 +18,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/smartlizzard/sclass
+        repoURL: https://github.com/smartlizzard/sclass.git
         targetRevision: day-137-q14
         path: jenkins
         helm:
