@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/scaler-bhavya/app-of-apps-repo
+    repoURL: https://github.com/smartlizzard/sclass.git
     path: .
     targetRevision: day-136-q14
     directory:
