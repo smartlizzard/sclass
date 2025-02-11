@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backend
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/smartlizzard/sclass  # Replace with your GitHub account if needed
+    path: backend                                 # Path within the repository
+    targetRevision: day-136-q14                                      # Replace "main" with the appropriate branch or tag
+  destination:
+    server: https://kubernetes.default.svc                     # In-cluster Kubernetes API server
+    namespace: default                          # Target namespace
+  syncPolicy:
+    automated:
+      prune: true                                              # Prune resources not in the source
+      selfHeal: true                                           # Automatically fix drift
+    syncOptions:
+      - CreateNamespace=true 
