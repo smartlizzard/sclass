@@ -1,1 +1,4 @@
-Readme
+$ kubectl apply -k environments/blue
+$ kubectl apply -k environments/green
+
+$ kubectl patch service nginx-service -p '{"spec":{"selector":{"environment":"green"}}}'
